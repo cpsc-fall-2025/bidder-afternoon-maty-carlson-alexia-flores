@@ -48,10 +48,16 @@ void GenerateBids(int rounds, int budget, std::string output_filename) {
   for (int i = 1; i <= NumSkippedRounds; i++) {
     WhateverMan << 0 << "\n";
   }
+  int Remainder {budget};
   const int NumBidRounds {rounds-NumSkippedRounds};
-  const int BidAmount {budget/NumBidRounds};
+  int BidAmount {budget/NumBidRounds};
   for (int i = NumSkippedRounds+1; i <= rounds; i++) {
+    Remainder -= BidAmount;
+    if (i == rounds) {
+       BidAmount += Remainder;
+    }
     WhateverMan << BidAmount << "\n";
+
   }
   // Your code here
 }
